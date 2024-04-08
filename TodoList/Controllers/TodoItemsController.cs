@@ -20,7 +20,10 @@ namespace TodoList.Controllers
             _context = context;
         }
 
-        // GET: api/TodoItems
+        /// <summary>
+        /// 获取所有todo
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TodoItemDto>>> GetTodoItems()
         {
