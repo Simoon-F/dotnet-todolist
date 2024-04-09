@@ -15,11 +15,16 @@ public static class SwaggerExtensions
     {
         services.AddSwaggerGen(options =>
         {
-            var basePath = AppContext.BaseDirectory;
+            #region 注释展示
+            
+            var basePath = AppContext.BaseDirectory; // 获取当前项目的执行目录
             var xmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var file = Path.Combine(basePath, xmlFileName);
     
             options.IncludeXmlComments(file, true);
+            
+            #endregion
+            
         });
     }
 
