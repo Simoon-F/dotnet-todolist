@@ -14,6 +14,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase("TodoList"));
 builder.Services.AddCustomSwaggerGen();
 
+// log4net
+// nuget: log4net
+//        Microsoft.Extensions.Logging.Log4Net.AspNetCore
+builder.Logging.AddLog4Net("Config/log4net.Config");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
