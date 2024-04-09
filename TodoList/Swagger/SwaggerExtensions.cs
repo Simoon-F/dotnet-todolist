@@ -1,4 +1,5 @@
 using System.Reflection;
+using Microsoft.OpenApi.Models;
 
 namespace TodoList.Swagger;
 
@@ -23,6 +24,37 @@ public static class SwaggerExtensions
     
             options.IncludeXmlComments(file, true);
             
+            #endregion
+
+
+            #region 支持token传值
+            
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+            {
+                Description = "格式：Bearer (token)",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey,
+                BearerFormat = "JWT",
+                Scheme = "Bearer"
+            });
+            
+            // 添加安全要求
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference()
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new List<string>()
+                }
+            });
+
             #endregion
             
         });
